@@ -1,1 +1,1 @@
-# This Repository consists of projects I did when training with Edyoda
+## This Repository consists of projects I did when training with Edyoda
