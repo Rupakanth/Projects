@@ -1,0 +1,167 @@
+<html>
+<head>
+<title>
+Big Mart Sales Prediction
+</title>
+<link href='static\bootstrap.min.css' rel = "stylesheet" type="text/css">
+</head>
+<body>
+
+<div class= 'container' style = 'padding-top: 60px ; padding-bottom: 20px'>
+	<div class='container'>
+		
+		<div class = 'row'>
+			<div class ='col-8'>
+				<h1 class='display-4'>BigMart Sales Prediction<h1>
+	<p class = 'lead'>This is a Machine model deployed for prediction of BigMart sales of each product at a particular Outlet.</p>
+				<hr class='my-4'>
+			</div>
+
+			<div class = 'card text-white bg-dark mb-3' style='max-width:20rem;'>
+		<div class = 'card-header'>Result</div>
+		<div class = 'card-body'>
+
+			<h4 class='card-title'>{{ predictedvalue }}</h4>
+			<p class='card-text'>Predicted sales of each product at a particular outlet.</p>
+				</div>
+			</div>
+		</div>
+	
+
+
+<div class ='row'>
+<div class ="col-8">
+	<img src="https://miro.medium.com/max/499/1*LXEEUY5Vf3tTCMFC41llJQ.png" align = 'center'>
+	<hr class="my-5">
+	<form action="/report" method = "POST">
+	<fieldset>
+		<p class='lead'>Pandas Profiling report of the Data used for training the model</p>
+		<button type = "submit" class="btn btn-success">Get Report</button>
+	</fieldset>
+	</form>
+</div>
+
+<div class = 'col-4'>
+		<form action = "/" method = "POST">
+	<fieldset>
+			<legend>select the features</legend>
+
+<div class="form-group">
+	<label for="Item_Weight">Item Weight</label>
+	<input type = "float" class="form-control" id = "Item_Weight" name = "Item_Weight" aria-describedby="wgthelp" placeholder="Enter Item Weight">btw:[4.5-21.5]
+	<small id = 'wgthelp' class ="form-text text-muted">Weight of the Product.</small>
+	</div>
+
+<div class="form-group">
+	<label for="Item_Fat_Content">Fat Content</label>
+	<select class="form-control" id="Item_Fat_Content" name = "Item_Fat_Content" aria-describedby='fathelp'>
+		<option value=0>Low Fat</option>
+		<option value=1>Regular</option>
+	</select>
+	<small id='fathelp' class='form-text text-muted'>Whether the product is low fat or not.</small>
+	</div>
+
+<div class="form-group">
+	<label for="Item_Visibility">Item Visibility Percentage</label>
+	<input type = "float" class = "form-control" id = "Item_Visibility" name ="Item_Visibility" aria-describedby="vishelp" placeholder="Enter Item Visibility Percentage">btw:[0-1]
+	<small id="vishelp" class = "form-text text-muted">The % of total display area of all products in a store allocated to the particular product.</small>
+	</div>
+
+<div class="form-group">
+	<label for="Item_Type">Item Type</label>
+	<select class="form-control" id="Item_Type" name="Item_Type" aria-describedby='itemtypehelp'>
+		<option value="Dairy">Dairy</option>
+		<option value="Soft Drinks">Soft Drinks</option>
+		<option value="Meat">Meat</option>
+		<option value="Fruits and Vegetables">Fruits and Vegetables</option>
+		<option value="Household">Household</option>
+		<option value="Baking Goods">Baking Goods</option>
+		<option value="Snack Foods">Snack Foods</option>
+		<option value="Frozen Foods">Frozen Foods</option>
+		<option value="Breakfast">Breakfast</option>
+		<option value="Health and Hygiene">Health and Hygiene</option>
+		<option value="Hard Drinks">Hard Drinks</option>
+		<option value="Canned">Canned</option>
+		<option value="Breads">Breads</option>
+		<option value="Starchy Foods">Starchy Foods</option>
+		<option value="Others">Others</option>
+		<option value="Seafood">Seafood</option>
+	</select>
+	<small id='itemtypehelp' class='form-text text-muted'>The category to which the product belongs.</small>
+	</div>
+
+<div class="form-group">
+	<label for="Item_MRP">Item MRP</label>
+	<input type ='float' class="form-control" id="Item_MRP" name ="Item_MRP" aria-describedby='mrphelp' placeholder="Enter the price of the product">btw:[31-267]
+	<small id="mrphelp" class="form-text text-muted">Maximum Retail Price (list price) of the product.</small>
+	</div>
+
+<div class='form-group'>
+	<label for="Outlet_Establishment_Year">Outlet Establishment Year</label>
+	<select class="form-control" id = "Outlet_Establishment_Year" name="Outlet_Establishment_Year" aria-describedby="yearhelp">
+		<option value = 1985>1985</option>
+		<option value = 1986>1986</option>
+		<option value = 1987>1987</option>
+		<option value = 1988>1988</option> 
+		<option value = 1989>1989</option>
+		<option value = 2000>2000</option>
+		<option value = 2001>2001</option>
+		<option value = 2002>2002</option>
+		<option value = 2003>2003</option>
+		<option value = 2004>2004</option>
+		<option value = 2005>2005</option>
+		<option value = 2006>2006</option>
+		<option value = 2007>2007</option>
+		<option value = 2008>2008</option>
+		<option value = 2009>2009</option>
+	</select>
+	<small id="yearhelp" class="form-text text-muted">The year in which store was established.</small>
+	</div>
+
+<div class= "form-group">
+	<label for="Outlet_Location_Type">Location Type</label>
+	<select class ="form-control" id= "Outlet_Location_Type" name= "Outlet_Location_Type" aria-describedby="locationhelp">
+		<option value="Tier 1">Tier 1</option>
+		<option value="Tier 2">Tier 2</option>
+		<option value="Tier 3">Tier 3</option>
+	</select>
+	<small id="locationhelp" class="form-text text-muted">The type of city in which the store is located.</small>
+	</div>
+
+<div class="form-group">
+	<label for="Outlet_Type">Outlet Type</label>
+		<select class="form-control" id = "Outlet_Type" name = "Outlet_Type" aria-describedby="outlettypehelp">
+			<option value="Supermarket Type1">Supermarket Type1</option>
+			<option value="Supermarket Type2">Supermarket Type2</option>
+			<option value="Grocery Store">Grocery Store</option>
+			<option value="Supermarket Type3">Supermarket Type3</option>
+		</select>
+		<small id="outlettypehelp" class="form-text text-muted">Whether the outlet is just a grocery store or some sort of supermarket.</small>
+		</div>
+		
+<div class="form-group">
+	<label for="Outlet_Size">Outlet Size</label>
+		<select class="form-control" id = "Outlet_Size" name = "Outlet_Size" aria-describedby="outletsizehelp">
+			<option value="Medium">Medium</option>
+			<option value="High">High</option>
+			<option value="Small">Small</option>
+		</select>
+		<small id="outletsizehelp" class="form-text text-muted">The size of the store in terms of ground area covered.</small>
+		</div>
+	<button type="submit" class="btn btn-primary">Predict</button>
+	</fieldset>
+		</form>
+
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>
+	
+	
+
+
+
+
